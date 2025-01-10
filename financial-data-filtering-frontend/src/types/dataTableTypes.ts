@@ -7,12 +7,11 @@ export type Filter = {
     maxNetIncome?: number,
 }
 
+export type SortColumns = "year" | "revenue" | "netIncome"
+
 export type Sorter = {
-    column: "date" | "revenue" | "netIncome", // as per the sorting criteria
+    column?: SortColumns, // as per the sorting criteria
     order: "asc" | "desc"
-    } | {
-    column: "",
-    order: ""
 }
 
 // only the fields that are to be displayed
