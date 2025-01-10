@@ -48,7 +48,7 @@ async def handle_get_annual_aapl_income(
     min_year: Optional[int] = None, max_year: Optional[int] = None,
     min_revenue: Optional[float] = None, max_revenue: Optional[float] = None,
     min_net_income: Optional[float] = None, max_net_income: Optional[float] = None,
-    sort_by: Literal["year", "revenue", "netIncome"] = "year", sort_order: Literal["asc", "desc"] = "asc"
+    sort_by: Literal["year", "revenue", "netIncome"] | None = None, sort_order: Literal["asc", "desc"] | None = None
 ):
     
     if max_year is None:
@@ -69,6 +69,9 @@ async def handle_get_annual_aapl_income(
                 filter_by_revenue(entry, min_revenue, max_revenue) and
                 filter_by_net_income(entry, min_net_income, max_net_income)
         ]
+
+        if sort_by is None:
+            return filtered_data
 
         if sort_by == "year":
             sort_key = lambda entry: int(entry.get("date")[:4])

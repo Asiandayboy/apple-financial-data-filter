@@ -127,8 +127,16 @@ mock_aapl_data = [
             200,
             lambda data: len(data) == 0
         ),
+
+        # Test Case 8: No filters or sorting, order doesn't matter, expect all elements
+        (
+            {},
+            5,
+            200,
+            lambda data: data
+        ),
     ],
-    ids=[1, 2, 3, 4, 5, 6, 7]
+    ids=[1, 2, 3, 4, 5, 6, 7, 8]
 )
 def test_handle_get_annual_appl_income(mock_get, params, expectedLength, code, validateSortFunc):
     mock_response = AsyncMock()
