@@ -2,6 +2,11 @@
 
 ## Running the Project Locally
 
+### Prerequisites
+Ensure you have the following installed:
+- Python
+- Node.js and npm
+
 ### Backend (FastAPI)
 - `cd` into backend directory
 - create your venv with `python -m venv venv`
