@@ -6,20 +6,20 @@
 
 
 .filter-input, .sorter-input {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500;
 }
 
 
 .my-th {
-    @apply hidden md-lg:table-cell
+    @apply hidden md-lg:table-cell;
 }
 
 .my-td {
-    @apply grid grid-cols-2 text-gray-700 text-right items-center md-lg:table-cell md-lg:before:hidden md-lg:px-4 md-lg:py-2
+    @apply grid grid-cols-2 text-gray-700 text-right items-center md-lg:table-cell md-lg:before:hidden md-lg:px-4 md-lg:py-2;
 }
 
 .td-content {
-    @apply pr-4 md-lg:pr-0
+    @apply pr-4 md-lg:pr-0;
 }
 
 
