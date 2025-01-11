@@ -18,7 +18,7 @@ app = FastAPI()
 
 env = os.getenv("ENV")
 if env == "production":
-    allowed_origins = ["https://aapl-finance-app.vercel.app/"]
+    allowed_origins = ["https://aapl-finance-app.vercel.app"]
 else:
     allowed_origins = ["http://localhost:5173"]
 
@@ -26,7 +26,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET"],
     allow_headers=["*"],
 )
 
