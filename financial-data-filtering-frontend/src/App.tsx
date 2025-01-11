@@ -1,12 +1,16 @@
 import './index.css'
 import { DataTable, DataTableFilter } from './components/DataTable'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AAPLData, Filter, SortColumns, Sorter } from './types/dataTableTypes'
 
 
-
-const BASE_URL = "http://127.0.0.1:8000"
 const BACKEND_ENDPOINT = "/aapl/annual-income"
+
+
+const BASE_URL = import.meta.env.VITE_ENV === "production" 
+  ? "https://aapl-financial-data-filter.vercel.app/"
+  : "http://127.0.0.1:8000"
+
 
 
 
@@ -55,7 +59,7 @@ function App() {
   const [sorter, setSorter] = useState<Sorter>({ column: "year", order: "asc" })
   const [loading, setLoading] = useState(false)
 
-  
+
   function handleFilterChange(name: string, value: string) {
     setFilter((prev) => ({
       ...prev,
