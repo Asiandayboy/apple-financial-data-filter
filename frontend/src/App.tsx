@@ -129,7 +129,7 @@ function App() {
             onSortOrderChange={handleSortOrderChange}
           />
           <button 
-            className='text-lg border-2 py-1 px-8 rounded-lg hover:bg-gray-200'
+            className='text-lg border-2 py-1 px-8 rounded-lg hover:bg-gray-200 mb-10'
             onClick={fetchAAPLData}
           >
             Search
