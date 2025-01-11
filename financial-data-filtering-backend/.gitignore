@@ -38,3 +38,4 @@ htmlcov/
 
 # Sensitive files
 .env
+.vercel

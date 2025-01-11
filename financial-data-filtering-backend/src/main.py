@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Response, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional, Literal
 from dotenv import load_dotenv
 from datetime import datetime
@@ -14,6 +15,20 @@ AAPL_API_URL = f"https://financialmodelingprep.com/api/v3/income-statement/AAPL?
 
 app = FastAPI()
 
+
+env = os.getenv("ENV", "development")
+if env == "production":
+    allowed_origins = ["https://Asiandayboy.github.io/apple-financial-data-filter"]
+else:
+    allowed_origins = ["http://localhost:5173"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 
