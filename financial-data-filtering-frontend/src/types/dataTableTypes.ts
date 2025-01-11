@@ -21,6 +21,6 @@ export type AAPLData = {
     netIncome: number,
     grossProfit: number,
     eps: number,
-    operatingIncoming: number
+    operatingIncome: number
 }
   
