@@ -1,6 +1,6 @@
 import './index.css'
 import { DataTable, DataTableFilter } from './components/DataTable'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AAPLData, Filter, SortColumns, Sorter } from './types/dataTableTypes'
 
 
@@ -110,6 +110,10 @@ function App() {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchAAPLData()
+  }, [])
 
 
 
