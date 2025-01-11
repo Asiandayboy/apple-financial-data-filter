@@ -178,7 +178,7 @@ function DataTable({ data, loading }: DataTableProps) {
                 className="border-b even:bg-gray-50"
               >
                 <td 
-                  data-cell="date"
+                  data-cell="Date"
                   className="my-td whitespace-nowrap stack-td"
                 >
                   <div className="td-content">
