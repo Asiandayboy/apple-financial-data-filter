@@ -28,9 +28,10 @@ function DataTableFilter({
   onSortByChange,
   onSortOrderChange
 }: DataTableFilerProps) {
+
   return (
     <section>
-      <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div>
           <label htmlFor="">
             Min Year:
@@ -38,6 +39,7 @@ function DataTableFilter({
               type="number" 
               value={filter.minYear} 
               onChange={(e) => onFilterChange("minYear", e.target.value)}
+              className="filter-input"
             />
           </label>
           <label htmlFor="">
@@ -46,6 +48,7 @@ function DataTableFilter({
               type="number" 
               value={filter.maxYear} 
               onChange={(e) => onFilterChange("maxYear", e.target.value)}
+              className="filter-input"
             />
           </label>
         </div>
@@ -57,6 +60,7 @@ function DataTableFilter({
               type="number" 
               value={filter.minRevenue} 
               onChange={(e) => onFilterChange("minRevenue", e.target.value)}
+              className="filter-input"
             />
           </label>
           <label htmlFor="">
@@ -65,17 +69,19 @@ function DataTableFilter({
               type="number" 
               value={filter.maxRevenue} 
               onChange={(e) => onFilterChange("maxRevenue", e.target.value)}
+              className="filter-input"
             />
           </label>
         </div>
 
-        <div>
+        <div className="col-span-1 sm:col-span-2 lg:col-span-1">
           <label htmlFor="">
             Min Net Income:
             <input 
               type="number" 
               value={filter.minNetIncome} 
               onChange={(e) => onFilterChange("minNetIncome", e.target.value)}
+              className="filter-input"
             />
           </label>
           <label htmlFor="">
@@ -84,12 +90,14 @@ function DataTableFilter({
               type="number" 
               value={filter.maxNetIncome} 
               onChange={(e) => onFilterChange("maxNetIncome", e.target.value)}
+              className="filter-input"
             />
           </label>
         </div>
       </div>
 
-      <div>
+      {/* className="grid grid-cols-1 sm:grid-cols-2 gap-6" */}
+      <div className="flex justify-center mt-8 gap-4">
         <div>
           <label htmlFor="sortBy">Sort By:</label>
           <select 
@@ -97,6 +105,7 @@ function DataTableFilter({
             id="sortBy" 
             value={sorter.column}
             onChange={(e) => onSortByChange(e.target.value as SortColumns)}
+            className="sorter-input"
           >
             <option value="year">Year</option>
             <option value="revenue">Revenue</option>
@@ -109,8 +118,9 @@ function DataTableFilter({
           <select 
             name="sortOrder" 
             id="sortOrder" 
-            value={sorter.column}
+            value={sorter.order}
             onChange={() => onSortOrderChange()}
+            className="sorter-input"
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
@@ -123,37 +133,98 @@ function DataTableFilter({
 }
 
 
+function formatCurrencyAmountToUSD(amount: number): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD"
+  }).format(amount)
+}
+
+
 function DataTable({ data, loading }: DataTableProps) {
   if (loading) {
     return (
-      <div>Loading...</div>
+      <div className="font-semibold">Loading...</div>
+    )
+  }
+
+  if (data.length == 0) {
+    return (
+      <div className="font-semibold">No results</div>
     )
   }
 
 
   return (
-    <section>
-			<table>
+    <section className="">
+			<table className="border-4 p-4 border-collapse w-full overflow-x-auto">
         <thead>
-          <tr>
-            <th>Date</th>
-            <th>Revenue</th>
-            <th>Net Income</th>
-            <th>Gross Profit</th>
-            <th>EPS (Earnings Per Share)</th>
-            <th>Operating Income</th>
+          <tr className="bg-gray-100">
+            <th className="my-th px-4 py-2 text-left font-semibold text-gray-700 whitespace-nowrap">Date</th>
+            <th className="my-th px-4 py-2 text-left font-semibold text-gray-700">Revenue</th>
+            <th className="my-th px-4 py-2 text-left font-semibold text-gray-700">Net Income</th>
+            <th className="my-th px-4 py-2 text-left font-semibold text-gray-700">Gross Profit</th>
+            <th className="my-th px-4 py-2 text-left font-semibold text-gray-700 whitespace-normal w-[120px]">
+              EPS <br /> (Earnings Per Share)
+            </th>
+            <th className="my-th px-4 py-2 text-left font-semibold text-gray-700">Operating Income</th>
           </tr>
         </thead>
         <tbody>
           {
             data.map((entry, i) => (
-              <tr key={i}>
-                <td>{entry.date}</td>
-                <td>{entry.revenue}</td>
-                <td>{entry.netIncome}</td>
-                <td>{entry.grossProfit}</td>
-                <td>{entry.eps}</td>
-                <td>{entry.operatingIncoming}</td>
+              <tr 
+                key={i} 
+                className="border-b even:bg-gray-50"
+              >
+                <td 
+                  data-cell="date"
+                  className="my-td whitespace-nowrap stack-td"
+                >
+                  <div className="td-content">
+                    {entry.date}
+                  </div>
+                </td>
+                <td 
+                  data-cell="Revenue"
+                  className="my-td stack-td"
+                >
+                  <div className="td-content">
+                    {formatCurrencyAmountToUSD(entry.revenue)}
+                  </div>
+                </td>
+                <td 
+                  data-cell="Net Income"
+                  className="my-td stack-td"
+                >
+                  <div className="td-content">
+                    {formatCurrencyAmountToUSD(entry.netIncome)}
+                  </div>
+                </td>
+                <td 
+                  data-cell="Gross Profit"
+                  className="my-td stack-td"
+                >
+                  <div className="td-content">
+                    {formatCurrencyAmountToUSD(entry.grossProfit)}
+                  </div>
+                </td>
+                <td 
+                  data-cell="EPS (Earnings Per Share)"
+                  className="my-td stack-td"
+                >
+                  <div className="td-content">
+                    {entry.eps}
+                  </div>
+                </td>
+                <td 
+                  data-cell="Operating Income"
+                  className="my-td stack-td"
+                >
+                  <div className="td-content">
+                    {formatCurrencyAmountToUSD(entry.operatingIncome)}
+                  </div>
+                </td>
               </tr>
             ))
           }
