@@ -16,9 +16,9 @@ AAPL_API_URL = f"https://financialmodelingprep.com/api/v3/income-statement/AAPL?
 app = FastAPI()
 
 
-env = os.getenv("ENV", "development")
+env = os.getenv("ENV")
 if env == "production":
-    allowed_origins = ["https://Asiandayboy.github.io/apple-financial-data-filter"]
+    allowed_origins = ["https://aapl-finance-app.vercel.app/"]
 else:
     allowed_origins = ["http://localhost:5173"]
 
